@@ -1,0 +1,68 @@
+name: User Story
+description: Small, implementable piece of functionality
+title: "[STORY] "
+labels: ["user-story", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## User Story Overview
+        Use this template for small, implementable pieces of functionality that can be completed in 1-3 days.
+
+  - type: input
+    id: parent_feature
+    attributes:
+      label: Parent Feature
+      description: Link to the feature this story belongs to (use #issue_number)
+      placeholder: "#456"
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_story
+    attributes:
+      label: User Story
+      description: "As a [user type], I want [specific action] so that [immediate benefit]"
+      placeholder: "As a developer, I want to see a 'Login with GitHub' button so that I can start the authentication process"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Specific, testable criteria (Given/When/Then format preferred)
+      placeholder: "Given I am on the login page\nWhen I click the 'Login with GitHub' button\nThen I am redirected to GitHub OAuth page"
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_notes
+    attributes:
+      label: Implementation Notes
+      description: Technical details and approach
+      placeholder: "- Add OAuth button component\n- Configure GitHub App credentials\n- Implement redirect handler"
+
+  - type: dropdown
+    id: story_points
+    attributes:
+      label: Story Points
+      description: Effort estimate in story points
+      options:
+        - "1 - Very Small"
+        - "2 - Small"
+        - "3 - Medium"
+        - "5 - Large"
+        - "8 - Very Large"
+    validations:
+      required: true
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: Definition of Done
+      description: Checklist for story completion
+      placeholder: "- [ ] Code implemented\n- [ ] Unit tests written\n- [ ] Code reviewed\n- [ ] Feature tested\n- [ ] Documentation updated"
+    validations:
+      required: true

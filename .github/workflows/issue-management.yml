@@ -1,0 +1,36 @@
+name: Issue Management
+on:
+  issues:
+    types: [labeled, unlabeled, opened]
+
+jobs:
+  manage-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-assign epic to project
+        if: contains(github.event.label.name, 'epic')
+        uses: actions/add-to-project@v0.4.0
+        with:
+          project-url: https://github.com/users/FreeSideNomad/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-assign feature to project
+        if: contains(github.event.label.name, 'feature')
+        uses: actions/add-to-project@v0.4.0
+        with:
+          project-url: https://github.com/users/FreeSideNomad/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-assign user-story to project
+        if: contains(github.event.label.name, 'user-story')
+        uses: actions/add-to-project@v0.4.0
+        with:
+          project-url: https://github.com/users/FreeSideNomad/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-assign bug to project
+        if: contains(github.event.label.name, 'bug')
+        uses: actions/add-to-project@v0.4.0
+        with:
+          project-url: https://github.com/users/FreeSideNomad/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}

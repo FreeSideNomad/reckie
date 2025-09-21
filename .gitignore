@@ -125,4 +125,4 @@ temp/
 # AI API keys and configuration
 openai_key.txt
 anthropic_key.txt
-config/secrets.json
+config/secrets.jsonreckie.wiki/

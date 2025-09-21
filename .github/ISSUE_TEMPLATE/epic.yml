@@ -1,0 +1,87 @@
+name: Epic
+description: Large feature or capability that spans multiple iterations
+title: "[EPIC] "
+labels: ["epic", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Epic Overview
+        Use this template for large features or capabilities that will be broken down into multiple user stories and span multiple iterations.
+
+  - type: input
+    id: epic_title
+    attributes:
+      label: Epic Title
+      description: Brief, descriptive title for this epic
+      placeholder: "User Authentication and Authorization"
+    validations:
+      required: true
+
+  - type: textarea
+    id: business_value
+    attributes:
+      label: Business Value
+      description: What business problem does this epic solve?
+      placeholder: "Enables secure user access to platform features..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_personas
+    attributes:
+      label: Target User Personas
+      description: Which user types will benefit from this epic?
+      placeholder: "- Developers\n- Product Managers\n- AI Agents"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Epic Acceptance Criteria
+      description: High-level criteria for epic completion
+      placeholder: "- [ ] Users can create accounts\n- [ ] Users can authenticate\n- [ ] Access control works"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Business priority level
+      options:
+        - "Critical"
+        - "High"
+        - "Medium"
+        - "Low"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: iteration_target
+    attributes:
+      label: Target Iteration
+      description: When should this epic be completed?
+      options:
+        - "Current Iteration"
+        - "Next Iteration"
+        - "Future Iteration"
+        - "Backlog"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: What other epics or external dependencies are required?
+      placeholder: "- Depends on Infrastructure Epic\n- Requires OAuth provider setup"
+
+  - type: textarea
+    id: success_metrics
+    attributes:
+      label: Success Metrics
+      description: How will we measure success of this epic?
+      placeholder: "- User activation rate > 80%\n- Authentication errors < 1%"

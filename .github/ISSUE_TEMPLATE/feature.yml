@@ -1,0 +1,103 @@
+name: Feature
+description: Specific functionality within an epic
+title: "[FEATURE] "
+labels: ["feature", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Overview
+        Use this template for specific functionality that can be implemented within a single iteration.
+
+  - type: input
+    id: parent_epic
+    attributes:
+      label: Parent Epic
+      description: Link to the epic this feature belongs to (use #issue_number)
+      placeholder: "#123"
+    validations:
+      required: true
+
+  - type: input
+    id: feature_title
+    attributes:
+      label: Feature Title
+      description: Clear, specific title for this feature
+      placeholder: "GitHub OAuth Integration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_story
+    attributes:
+      label: User Story
+      description: "As a [user type], I want [functionality] so that [benefit]"
+      placeholder: "As a developer, I want to authenticate with GitHub so that I can access my repositories"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed_description
+    attributes:
+      label: Detailed Description
+      description: Complete description of the feature functionality
+      placeholder: "This feature implements GitHub OAuth2 authentication flow..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Specific, testable criteria for feature completion
+      placeholder: "- [ ] User can click 'Login with GitHub' button\n- [ ] OAuth flow redirects correctly\n- [ ] User session is established"
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_requirements
+    attributes:
+      label: Technical Requirements
+      description: Technical specifications and constraints
+      placeholder: "- Use GitHub Apps framework\n- Store tokens securely\n- Handle token refresh"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Feature priority within the epic
+      options:
+        - "Critical"
+        - "High"
+        - "Medium"
+        - "Low"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity Estimate
+      description: Development complexity estimate
+      options:
+        - "1 - Simple (1-2 days)"
+        - "2 - Moderate (3-5 days)"
+        - "3 - Complex (1-2 weeks)"
+        - "5 - Very Complex (2+ weeks)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: edge_cases
+    attributes:
+      label: Edge Cases & Error Handling
+      description: Known edge cases and error scenarios
+      placeholder: "- OAuth provider is down\n- User denies permission\n- Token expires during session"
+
+  - type: textarea
+    id: testing_notes
+    attributes:
+      label: Testing Requirements
+      description: Specific testing requirements and scenarios
+      placeholder: "- Unit tests for OAuth flow\n- Integration tests with GitHub API\n- E2E tests for login flow"
