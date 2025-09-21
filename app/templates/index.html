@@ -1,11 +1,103 @@
 {% extends "base.html" %}
 
+{% block page_title %}Dashboard{% endblock %}
+
 {% block content %}
 <div class="container">
-    <h1>Hello World from Reckie!</h1>
-    <p>AI-Native Requirements Engineering Platform</p>
-    <div id="status" data-testid="hello-world-message">
-        System is running successfully.
+    <!-- Welcome Section -->
+    <div class="card" style="margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <div>
+                <h1 style="margin: 0 0 0.5rem 0; color: #111827;">Welcome to Reckie!</h1>
+                <p style="margin: 0; color: #6b7280;">AI-Native Requirements Engineering Platform</p>
+            </div>
+            <div id="status" data-testid="hello-world-message" class="status-indicator status-success interactive-element">
+                System is running successfully
+            </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <a href="/projects" class="btn btn-primary">Start New Project</a>
+            <a href="/ai-analysis" class="btn btn-secondary">Try AI Analysis</a>
+            <button class="btn btn-secondary">Watch Demo</button>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="card">
+            <h3 style="margin: 0 0 0.5rem 0; color: var(--reckie-blue);">Projects</h3>
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #111827;">12</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.875rem;">+3 this month</p>
+        </div>
+        <div class="card">
+            <h3 style="margin: 0 0 0.5rem 0; color: var(--reckie-blue);">Requirements</h3>
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #111827;">248</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.875rem;">+47 this week</p>
+        </div>
+        <div class="card">
+            <h3 style="margin: 0 0 0.5rem 0; color: var(--reckie-blue);">AI Insights</h3>
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #111827;">89</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Generated today</p>
+        </div>
+        <div class="card">
+            <h3 style="margin: 0 0 0.5rem 0; color: var(--reckie-blue);">Quality Score</h3>
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #111827;">94%</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Above average</p>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <div class="card">
+            <h3 style="margin: 0 0 1.5rem 0; color: #111827;">Recent Projects</h3>
+            <div style="space-y: 1rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #f9fafb; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <div>
+                        <p style="margin: 0; font-weight: 500; color: #111827;">E-commerce Platform</p>
+                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Last updated 2 hours ago</p>
+                    </div>
+                    <div class="status-indicator status-success">Active</div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #f9fafb; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <div>
+                        <p style="margin: 0; font-weight: 500; color: #111827;">Mobile Banking App</p>
+                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Last updated 1 day ago</p>
+                    </div>
+                    <div class="status-indicator status-warning">Review</div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #f9fafb; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <div>
+                        <p style="margin: 0; font-weight: 500; color: #111827;">IoT Dashboard</p>
+                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Last updated 3 days ago</p>
+                    </div>
+                    <div class="status-indicator status-success">Complete</div>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <a href="/projects" class="btn btn-secondary">View All Projects</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin: 0 0 1.5rem 0; color: #111827;">AI Insights</h3>
+            <div style="space-y: 1rem;">
+                <div style="padding: 1rem; background-color: #f0f9ff; border-radius: 0.5rem; border-left: 4px solid var(--reckie-blue); margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">Requirements Gap</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">Found 3 missing requirements in authentication module</p>
+                </div>
+                <div style="padding: 1rem; background-color: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid #16a34a; margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">Quality Improvement</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">Quality score increased by 8% this week</p>
+                </div>
+                <div style="padding: 1rem; background-color: #fffbeb; border-radius: 0.5rem; border-left: 4px solid #d97706; margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">Complexity Alert</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">High complexity detected in payment processing</p>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <a href="/ai-analysis" class="btn btn-secondary">View All Insights</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

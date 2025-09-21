@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block page_title %}Smart Generation{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+            <h1 style="margin: 0 0 0.5rem 0; color: #111827;">Smart Generation</h1>
+            <p style="margin: 0; color: #6b7280;">AI-powered requirement generation and enhancement</p>
+        </div>
+        <button class="btn btn-primary">✨ Generate Requirements</button>
+    </div>
+
+    <div class="card">
+        <h3 style="margin: 0 0 1.5rem 0; color: #111827;">Choose Generation Method</h3>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div class="card interactive-element" style="border: 2px solid #e5e7eb;">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <span style="font-size: 3rem;">📝</span>
+                    <h4 style="margin: 0.5rem 0; color: #111827;">From Description</h4>
+                </div>
+                <p style="color: #6b7280; margin-bottom: 1rem;">Describe your project in natural language and let AI generate structured requirements.</p>
+                <button class="btn btn-primary" style="width: 100%;">Start Generation</button>
+            </div>
+
+            <div class="card interactive-element" style="border: 2px solid #e5e7eb;">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <span style="font-size: 3rem;">🎯</span>
+                    <h4 style="margin: 0.5rem 0; color: #111827;">From Template</h4>
+                </div>
+                <p style="color: #6b7280; margin-bottom: 1rem;">Use industry-standard templates and customize them for your specific needs.</p>
+                <button class="btn btn-primary" style="width: 100%;">Browse Templates</button>
+            </div>
+
+            <div class="card interactive-element" style="border: 2px solid #e5e7eb;">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <span style="font-size: 3rem;">🔄</span>
+                    <h4 style="margin: 0.5rem 0; color: #111827;">Enhancement</h4>
+                </div>
+                <p style="color: #6b7280; margin-bottom: 1rem;">Improve existing requirements with AI suggestions for clarity and completeness.</p>
+                <button class="btn btn-primary" style="width: 100%;">Enhance Existing</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

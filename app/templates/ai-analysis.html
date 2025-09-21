@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block page_title %}AI Analysis{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+            <h1 style="margin: 0 0 0.5rem 0; color: #111827;">AI Analysis</h1>
+            <p style="margin: 0; color: #6b7280;">Leverage AI to analyze and improve your requirements</p>
+        </div>
+        <button class="btn btn-primary">🤖 Run New Analysis</button>
+    </div>
+
+    <!-- Analysis Tools -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="card interactive-element">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <span style="font-size: 2rem; margin-right: 1rem;">🔍</span>
+                <div>
+                    <h3 style="margin: 0; color: #111827;">Gap Analysis</h3>
+                    <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Find missing requirements</p>
+                </div>
+            </div>
+            <p style="color: #6b7280; margin-bottom: 1rem;">AI identifies potential gaps in your requirement coverage using advanced pattern recognition.</p>
+            <button class="btn btn-primary" style="width: 100%;">Start Analysis</button>
+        </div>
+
+        <div class="card interactive-element">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <span style="font-size: 2rem; margin-right: 1rem;">⚡</span>
+                <div>
+                    <h3 style="margin: 0; color: #111827;">Quality Assessment</h3>
+                    <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Evaluate requirement quality</p>
+                </div>
+            </div>
+            <p style="color: #6b7280; margin-bottom: 1rem;">Assess clarity, completeness, and consistency of your requirements with AI-powered scoring.</p>
+            <button class="btn btn-primary" style="width: 100%;">Assess Quality</button>
+        </div>
+
+        <div class="card interactive-element">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <span style="font-size: 2rem; margin-right: 1rem;">🎯</span>
+                <div>
+                    <h3 style="margin: 0; color: #111827;">Complexity Analysis</h3>
+                    <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Identify complex areas</p>
+                </div>
+            </div>
+            <p style="color: #6b7280; margin-bottom: 1rem;">Detect overly complex requirements that may need simplification or breaking down.</p>
+            <button class="btn btn-primary" style="width: 100%;">Analyze Complexity</button>
+        </div>
+    </div>
+
+    <!-- Recent Analysis Results -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <div class="card">
+            <h3 style="margin: 0 0 1.5rem 0; color: #111827;">Recent Analysis Results</h3>
+
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h4 style="margin: 0; color: #111827;">E-commerce Platform - Gap Analysis</h4>
+                    <div class="status-indicator status-error">3 Issues Found</div>
+                </div>
+                <p style="margin: 0.5rem 0; color: #6b7280; font-size: 0.875rem;">Completed 2 hours ago</p>
+                <div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 1rem; margin: 1rem 0; border-radius: 0.375rem;">
+                    <p style="margin: 0; color: #991b1b; font-weight: 500;">Missing authentication requirements</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #7f1d1d; font-size: 0.875rem;">Two-factor authentication and password recovery flows are not specified.</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" style="font-size: 0.875rem;">View Details</button>
+                    <button class="btn btn-primary" style="font-size: 0.875rem;">Apply Suggestions</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h4 style="margin: 0; color: #111827;">Mobile Banking - Quality Assessment</h4>
+                    <div class="status-indicator status-success">Excellent (94%)</div>
+                </div>
+                <p style="margin: 0.5rem 0; color: #6b7280; font-size: 0.875rem;">Completed 1 day ago</p>
+                <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem; margin: 1rem 0; border-radius: 0.375rem;">
+                    <p style="margin: 0; color: #166534; font-weight: 500;">High quality requirements detected</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #166534; font-size: 0.875rem;">Requirements are well-structured with clear acceptance criteria.</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" style="font-size: 0.875rem;">View Report</button>
+                    <button class="btn btn-primary" style="font-size: 0.875rem;">Export Results</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin: 0 0 1.5rem 0; color: #111827;">AI Insights</h3>
+
+            <div style="margin-bottom: 1.5rem;">
+                <div style="background-color: #f0f9ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">💡 Pro Tip</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">Run gap analysis after major requirement changes to maintain coverage.</p>
+                </div>
+
+                <div style="background-color: #fef3c7; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">⚠️ Attention</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">3 projects have requirements pending AI review.</p>
+                </div>
+
+                <div style="background-color: #f0fdf4; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <p style="margin: 0; font-weight: 500; color: #111827; font-size: 0.875rem;">📈 Trend</p>
+                    <p style="margin: 0.5rem 0 0 0; color: #6b7280; font-size: 0.75rem;">Requirement quality has improved 15% this month.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" style="width: 100%;">Configure AI Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

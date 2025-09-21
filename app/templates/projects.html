@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block page_title %}Projects{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+            <h1 style="margin: 0 0 0.5rem 0; color: #111827;">Projects</h1>
+            <p style="margin: 0; color: #6b7280;">Manage your requirements engineering projects</p>
+        </div>
+        <button class="btn btn-primary">+ New Project</button>
+    </div>
+
+    <!-- Project Stats -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div class="card" style="text-align: center;">
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: var(--reckie-blue);">12</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280;">Total Projects</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #16a34a;">8</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280;">Active</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #d97706;">3</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280;">In Review</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <p style="font-size: 2rem; font-weight: 600; margin: 0; color: #6b7280;">1</p>
+            <p style="margin: 0.5rem 0 0 0; color: #6b7280;">Completed</p>
+        </div>
+    </div>
+
+    <!-- Projects List -->
+    <div class="card">
+        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 style="margin: 0; color: #111827;">All Projects</h3>
+            <div style="display: flex; gap: 1rem;">
+                <select style="padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;">
+                    <option>All Status</option>
+                    <option>Active</option>
+                    <option>In Review</option>
+                    <option>Completed</option>
+                </select>
+                <input type="text" placeholder="Search projects..." style="padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; min-width: 200px;">
+            </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <th style="text-align: left; padding: 1rem 0.5rem; color: #6b7280; font-weight: 500;">Project Name</th>
+                        <th style="text-align: left; padding: 1rem 0.5rem; color: #6b7280; font-weight: 500;">Status</th>
+                        <th style="text-align: left; padding: 1rem 0.5rem; color: #6b7280; font-weight: 500;">Requirements</th>
+                        <th style="text-align: left; padding: 1rem 0.5rem; color: #6b7280; font-weight: 500;">Last Updated</th>
+                        <th style="text-align: left; padding: 1rem 0.5rem; color: #6b7280; font-weight: 500;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                        <td style="padding: 1rem 0.5rem;">
+                            <div>
+                                <p style="margin: 0; font-weight: 500; color: #111827;">E-commerce Platform</p>
+                                <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Modern web-based shopping platform</p>
+                            </div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div class="status-indicator status-success">Active</div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #111827;">89 / 120</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #6b7280;">2 hours ago</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Edit</button>
+                                <button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                        <td style="padding: 1rem 0.5rem;">
+                            <div>
+                                <p style="margin: 0; font-weight: 500; color: #111827;">Mobile Banking App</p>
+                                <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Secure mobile banking solution</p>
+                            </div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div class="status-indicator status-warning">Review</div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #111827;">45 / 67</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #6b7280;">1 day ago</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Edit</button>
+                                <button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                        <td style="padding: 1rem 0.5rem;">
+                            <div>
+                                <p style="margin: 0; font-weight: 500; color: #111827;">IoT Dashboard</p>
+                                <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.875rem;">Real-time IoT device monitoring</p>
+                            </div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div class="status-indicator status-success">Complete</div>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #111827;">34 / 34</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <span style="color: #6b7280;">3 days ago</span>
+                        </td>
+                        <td style="padding: 1rem 0.5rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Export</button>
+                                <button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

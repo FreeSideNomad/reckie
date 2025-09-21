@@ -24,11 +24,11 @@ templates = Jinja2Templates(directory="app/templates")
 app.include_router(main_routes.router)
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse, name="home")
 async def read_root(request: Request):
-    """Hello World page."""
+    """Dashboard home page."""
     return templates.TemplateResponse(
-        request, "index.html", {"title": "Reckie - Hello World"}
+        request, "index.html", {"title": "Reckie - Dashboard"}
     )
 
 

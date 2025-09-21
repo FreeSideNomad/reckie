@@ -185,6 +185,7 @@ data_sources:
 - **Backend**: Node.js/Express or Python/FastAPI (based on team expertise)
 - **Frontend**: Server-side rendering with progressive enhancement
 - **Database**: PostgreSQL for structured data, GitHub for documents
+- **Data Access**: Appropriate ORM (SQLAlchemy for Python, Prisma/TypeORM for Node.js) for maintainability and type safety
 - **AI Integration**: OpenAI API with careful cost management
 - **Testing**: Playwright for E2E, Jest/pytest for unit tests
 - **Deployment**: GitHub Actions + cloud provider of choice
@@ -195,7 +196,7 @@ data_sources:
 3. **Heavy AJAX/HTMX** that complicates testing
 4. **Multi-tenant architecture** before business model validation
 5. **Microservices** for greenfield projects
-6. **Complex ORM** when simple queries suffice
+6. **Over-engineered data access** - use appropriate ORM for maintainability, avoid raw SQL for complex queries
 
 ## Quality Assurance Process
 
