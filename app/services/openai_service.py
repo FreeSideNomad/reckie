@@ -1,6 +1,6 @@
 """OpenAI API service using configured environment variables."""
 
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import httpx
 
@@ -10,7 +10,7 @@ from app.config import settings
 class OpenAIService:
     """Service for interacting with OpenAI API."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize OpenAI service with configured API key."""
         self.api_key = settings.openai_api_key
         self.base_url = "https://api.openai.com/v1"
@@ -29,7 +29,9 @@ class OpenAIService:
             response = await client.get(f"{self.base_url}/models", headers=headers)
             response.raise_for_status()
             data = response.json()
-            return [model["id"] for model in data.get("data", [])]
+            return [
+                model["id"] for model in data.get("data", [])
+            ]  # type: ignore[no-any-return]
 
     async def generate_completion(
         self, prompt: str, model: str = "gpt-3.5-turbo"
@@ -55,4 +57,6 @@ class OpenAIService:
             )
             response.raise_for_status()
             data = response.json()
-            return data["choices"][0]["message"]["content"]
+            return data["choices"][0]["message"][
+                "content"
+            ]  # type: ignore[no-any-return]

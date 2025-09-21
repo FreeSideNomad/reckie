@@ -9,7 +9,7 @@ from app.config import settings
 class WebhookService:
     """Service for validating GitHub webhooks."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize webhook service with configured secret."""
         self.secret = settings.github_webhook_secret
 

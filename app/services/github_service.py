@@ -10,7 +10,7 @@ from app.config import settings
 class GitHubService:
     """Service for interacting with GitHub API."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize GitHub service with configured token."""
         self.token = settings.github_token
         self.base_url = "https://api.github.com"
@@ -28,7 +28,7 @@ class GitHubService:
         async with httpx.AsyncClient() as client:
             response = await client.get(f"{self.base_url}/user", headers=headers)
             response.raise_for_status()
-            return response.json()
+            return response.json()  # type: ignore[no-any-return]
 
     async def get_repository_info(
         self, owner: str, repo: str
@@ -47,4 +47,4 @@ class GitHubService:
                 f"{self.base_url}/repos/{owner}/{repo}", headers=headers
             )
             response.raise_for_status()
-            return response.json()
+            return response.json()  # type: ignore[no-any-return]
