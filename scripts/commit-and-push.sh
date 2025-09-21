@@ -331,10 +331,117 @@ $([ "$success" = "true" ] && echo "The fix has been applied and committed. Re-ru
     gh issue comment "$issue_number" --body "$comment_body"
 }
 
+# Function to run comprehensive local quality checks
+run_local_quality_checks() {
+    log_info "Running comprehensive local quality checks..."
+
+    local has_python=false
+    if [ -d "app" ] && [ -f "pyproject.toml" ]; then
+        has_python=true
+    fi
+
+    local quality_passed=true
+
+    if $has_python; then
+        # Check for virtual environment
+        if [ ! -d ".venv" ]; then
+            log_warning "No virtual environment found, attempting to activate anyway..."
+        fi
+
+        # Try to activate virtual environment
+        if [ -f ".venv/bin/activate" ]; then
+            source .venv/bin/activate
+        elif [ -f ".venv/Scripts/activate" ]; then
+            source .venv/Scripts/activate
+        fi
+
+        # Run Python quality checks
+        log_info "Running Black code formatter..."
+        if command -v black >/dev/null 2>&1; then
+            if ! black app/ tests/ 2>/dev/null; then
+                log_warning "Black formatting applied changes"
+            fi
+        else
+            log_warning "Black not found, skipping code formatting"
+        fi
+
+        log_info "Running import sorting with isort..."
+        if command -v isort >/dev/null 2>&1; then
+            if ! isort app/ tests/ 2>/dev/null; then
+                log_warning "isort applied import sorting changes"
+            fi
+        else
+            log_warning "isort not found, skipping import sorting"
+        fi
+
+        log_info "Running flake8 linting..."
+        if command -v flake8 >/dev/null 2>&1; then
+            if ! flake8 app/ tests/ 2>/dev/null; then
+                log_error "flake8 found linting issues"
+                quality_passed=false
+            fi
+        else
+            log_warning "flake8 not found, skipping linting"
+        fi
+
+        log_info "Running mypy type checking..."
+        if command -v mypy >/dev/null 2>&1; then
+            if ! mypy app/ 2>/dev/null; then
+                log_error "mypy found type checking issues"
+                quality_passed=false
+            fi
+        else
+            log_warning "mypy not found, skipping type checking"
+        fi
+
+        # Run tests if pytest is available
+        log_info "Running tests with pytest..."
+        if command -v pytest >/dev/null 2>&1; then
+            if ! pytest tests/ -v 2>/dev/null; then
+                log_warning "Some tests failed, but continuing..."
+            fi
+        else
+            log_warning "pytest not found, skipping tests"
+        fi
+    fi
+
+    # Check for other common quality tools
+    if [ -f "package.json" ]; then
+        log_info "Running npm/yarn quality checks..."
+        if command -v npm >/dev/null 2>&1; then
+            # Run linting if available
+            if npm run lint 2>/dev/null; then
+                log_success "npm lint passed"
+            else
+                log_warning "npm lint not available or failed"
+            fi
+        fi
+    fi
+
+    if $quality_passed; then
+        log_success "All quality checks passed!"
+        return 0
+    else
+        log_error "Quality checks failed. Please fix issues before committing."
+        log_info "Common fixes needed:"
+        log_info "- Fix flake8 linting issues (line length, unused imports, etc.)"
+        log_info "- Add missing type annotations for mypy"
+        log_info "- Ensure all imports are properly sorted"
+        log_info "- Run formatters to ensure consistent code style"
+        return 1
+    fi
+}
+
 # Main execution function
 main() {
     # Check if there are changes to commit
     if [ -z "$(git diff --cached --name-only)" ]; then
+        # Run quality checks before staging
+        if ! run_local_quality_checks; then
+            log_error "Quality checks failed. Aborting commit."
+            exit 1
+        fi
+
         log_info "Staging all changes..."
         git add -A
 
