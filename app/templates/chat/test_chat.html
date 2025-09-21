@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="{{ url_for('static', path='css/style.css') }}" rel="stylesheet">
+    <style>
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-section {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-result {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .test-result.success {
+            background-color: #dcfce7;
+            border: 1px solid #16a34a;
+        }
+
+        .test-result.error {
+            background-color: #fee2e2;
+            border: 1px solid #dc2626;
+        }
+
+        .test-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center;">
+                    <a href="{{ url_for('read_root') }}" style="text-decoration: none; color: var(--reckie-blue); font-size: 1.5rem; font-weight: 700; margin-right: 2rem;">
+                        Reckie
+                    </a>
+                    <h1 style="margin: 0; color: #374151;">{{ page_title }}</h1>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="{{ url_for('chat_interface') }}" class="btn btn-primary">Full Chat</a>
+                    <a href="{{ url_for('read_root') }}" class="btn btn-secondary">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container test-container">
+        <!-- Service Status Test -->
+        <div class="test-section">
+            <h2>Service Status Test</h2>
+            <p>Check if the chat services are properly configured and operational.</p>
+            <button id="test-status" class="btn btn-primary">Test Service Status</button>
+            <div id="status-result" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- Echo Test -->
+        <div class="test-section">
+            <h2>Echo Test (No AI)</h2>
+            <p>Test basic form submission and response handling without using AI services.</p>
+            <input type="text" id="echo-input" class="test-input" placeholder="Type a message to echo back...">
+            <button id="test-echo" class="btn btn-secondary">Test Echo</button>
+            <div id="echo-result" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- AI Connectivity Test -->
+        <div class="test-section">
+            <h2>AI Connectivity Test</h2>
+            <p>Test actual AI connectivity (requires OpenAI API key configuration).</p>
+            <input type="text" id="ai-input" class="test-input" placeholder="Type a simple question for the AI...">
+            <button id="test-ai" class="btn btn-primary">Test AI Connection</button>
+            <div id="ai-result" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- Debug Information -->
+        <div class="test-section">
+            <h2>Debug Information</h2>
+            <p>Current configuration and system status.</p>
+            <div id="debug-info" style="font-family: monospace; font-size: 0.875rem; color: #4b5563;">
+                Loading debug information...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class TestInterface {
+            constructor() {
+                this.attachEventListeners();
+                this.loadDebugInfo();
+            }
+
+            attachEventListeners() {
+                document.getElementById('test-status').addEventListener('click', () => this.testStatus());
+                document.getElementById('test-echo').addEventListener('click', () => this.testEcho());
+                document.getElementById('test-ai').addEventListener('click', () => this.testAI());
+            }
+
+            async testStatus() {
+                const button = document.getElementById('test-status');
+                const result = document.getElementById('status-result');
+
+                button.disabled = true;
+                button.textContent = 'Testing...';
+                result.style.display = 'block';
+
+                try {
+                    const response = await fetch('/chat/status');
+                    const data = await response.json();
+
+                    if (data.success) {
+                        result.className = 'test-result success';
+                        result.textContent = `Status Check Passed\n\nServices:\n${JSON.stringify(data.services, null, 2)}\n\nMessage: ${data.message}`;
+                    } else {
+                        result.className = 'test-result error';
+                        result.textContent = `Status Check Failed\n\nError: ${data.error}\nMessage: ${data.message}`;
+                    }
+                } catch (error) {
+                    result.className = 'test-result error';
+                    result.textContent = `Connection Error\n\nDetails: ${error.message}`;
+                } finally {
+                    button.disabled = false;
+                    button.textContent = 'Test Service Status';
+                }
+            }
+
+            async testEcho() {
+                const button = document.getElementById('test-echo');
+                const input = document.getElementById('echo-input');
+                const result = document.getElementById('echo-result');
+                const message = input.value.trim();
+
+                if (!message) {
+                    alert('Please enter a message to echo');
+                    return;
+                }
+
+                button.disabled = true;
+                button.textContent = 'Testing...';
+                result.style.display = 'block';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('message', message);
+
+                    const response = await fetch('/chat/test/echo', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        result.className = 'test-result success';
+                        result.textContent = `Echo Test Passed\n\nInput: "${message}"\nOutput: "${data.response}"\nMode: ${data.mode}`;
+                    } else {
+                        result.className = 'test-result error';
+                        result.textContent = `Echo Test Failed\n\nError: ${response.status} ${response.statusText}`;
+                    }
+                } catch (error) {
+                    result.className = 'test-result error';
+                    result.textContent = `Echo Test Error\n\nDetails: ${error.message}`;
+                } finally {
+                    button.disabled = false;
+                    button.textContent = 'Test Echo';
+                }
+            }
+
+            async testAI() {
+                const button = document.getElementById('test-ai');
+                const input = document.getElementById('ai-input');
+                const result = document.getElementById('ai-result');
+                const message = input.value.trim();
+
+                if (!message) {
+                    alert('Please enter a question for the AI');
+                    return;
+                }
+
+                button.disabled = true;
+                button.textContent = 'Testing AI...';
+                result.style.display = 'block';
+                result.className = 'test-result';
+                result.textContent = 'Contacting AI service... (this may take up to 30 seconds)';
+
+                try {
+                    // Start a conversation first
+                    const startFormData = new FormData();
+                    startFormData.append('user_id', 'test_user');
+                    startFormData.append('document_type', 'test');
+
+                    const startResponse = await fetch('/chat/start', {
+                        method: 'POST',
+                        body: startFormData
+                    });
+
+                    const startData = await startResponse.json();
+
+                    if (!startData.success) {
+                        throw new Error(`Failed to start conversation: ${startData.message}`);
+                    }
+
+                    // Send the test message
+                    const messageFormData = new FormData();
+                    messageFormData.append('conversation_id', startData.conversation_id);
+                    messageFormData.append('message', message);
+                    messageFormData.append('user_id', 'test_user');
+
+                    const messageResponse = await fetch('/chat/send', {
+                        method: 'POST',
+                        body: messageFormData
+                    });
+
+                    const messageData = await messageResponse.json();
+
+                    if (messageData.success) {
+                        result.className = 'test-result success';
+                        result.textContent = `AI Test Passed\n\nConversation ID: ${startData.conversation_id}\nYour Question: "${message}"\nAI Response: "${messageData.response}"\nTimestamp: ${messageData.timestamp}`;
+                    } else {
+                        result.className = 'test-result error';
+                        result.textContent = `AI Test Failed\n\nError: ${messageData.detail || 'Unknown error'}`;
+                    }
+                } catch (error) {
+                    result.className = 'test-result error';
+                    result.textContent = `AI Test Error\n\nDetails: ${error.message}\n\nNote: This test requires a valid OpenAI API key to be configured.`;
+                } finally {
+                    button.disabled = false;
+                    button.textContent = 'Test AI Connection';
+                }
+            }
+
+            async loadDebugInfo() {
+                const debugDiv = document.getElementById('debug-info');
+
+                try {
+                    const response = await fetch('/chat/status');
+                    const data = await response.json();
+
+                    debugDiv.innerHTML = `
+                        <strong>System Status:</strong> ${data.success ? 'Operational' : 'Error'}<br>
+                        <strong>Services:</strong><br>
+                        ${Object.entries(data.services || {}).map(([key, value]) =>
+                            `&nbsp;&nbsp;${key}: ${value}`
+                        ).join('<br>')}<br>
+                        <strong>Timestamp:</strong> ${new Date().toISOString()}<br>
+                        <strong>User Agent:</strong> ${navigator.userAgent}<br>
+                        <strong>Page URL:</strong> ${window.location.href}
+                    `;
+                } catch (error) {
+                    debugDiv.innerHTML = `
+                        <strong>System Status:</strong> Connection Error<br>
+                        <strong>Error:</strong> ${error.message}<br>
+                        <strong>Timestamp:</strong> ${new Date().toISOString()}
+                    `;
+                }
+            }
+        }
+
+        // Initialize test interface when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new TestInterface();
+        });
+    </script>
+</body>
+</html>

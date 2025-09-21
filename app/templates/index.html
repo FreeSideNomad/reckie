@@ -17,7 +17,8 @@
         </div>
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
             <a href="/projects" class="btn btn-primary">Start New Project</a>
-            <a href="/ai-analysis" class="btn btn-secondary">Try AI Analysis</a>
+            <a href="{{ url_for('chat_interface') }}" class="btn btn-primary">AI Chat Interface</a>
+            <a href="{{ url_for('chat_test') }}" class="btn btn-secondary">Test AI Connection</a>
             <button class="btn btn-secondary">Watch Demo</button>
         </div>
     </div>

@@ -9,6 +9,7 @@ from fastapi.templating import Jinja2Templates
 
 from app.config import settings
 from app.routes import main as main_routes
+from app.routes import chat
 
 app = FastAPI(
     title="Reckie - AI-Native Requirements Engineering Platform",
@@ -24,6 +25,7 @@ templates = Jinja2Templates(directory="app/templates")
 
 # Include routes
 app.include_router(main_routes.router)
+app.include_router(chat.router)
 
 
 @app.get("/", response_class=HTMLResponse, name="home")
