@@ -11,26 +11,26 @@ jobs:
         if: contains(github.event.label.name, 'epic')
         uses: actions/add-to-project@v0.4.0
         with:
-          project-url: https://github.com/users/FreeSideNomad/projects/1
+          project-url: https://github.com/users/FreeSideNomad/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Auto-assign feature to project
         if: contains(github.event.label.name, 'feature')
         uses: actions/add-to-project@v0.4.0
         with:
-          project-url: https://github.com/users/FreeSideNomad/projects/1
+          project-url: https://github.com/users/FreeSideNomad/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Auto-assign user-story to project
         if: contains(github.event.label.name, 'user-story')
         uses: actions/add-to-project@v0.4.0
         with:
-          project-url: https://github.com/users/FreeSideNomad/projects/1
+          project-url: https://github.com/users/FreeSideNomad/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Auto-assign bug to project
         if: contains(github.event.label.name, 'bug')
         uses: actions/add-to-project@v0.4.0
         with:
-          project-url: https://github.com/users/FreeSideNomad/projects/1
+          project-url: https://github.com/users/FreeSideNomad/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
