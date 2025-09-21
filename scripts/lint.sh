@@ -1,8 +1,23 @@
 #!/bin/bash
 set -e
 
+# Source common utilities
+source "$(dirname "$0")/common.sh"
+
 echo "🔍 Running code quality checks..."
-source .venv/bin/activate
+
+# Check dependencies
+log_info "Checking dependencies..."
+if ! check_dependencies "python3"; then
+    log_error "Missing required dependencies. Please install them and try again."
+    exit 1
+fi
+
+# Check and setup virtual environment
+if ! check_venv; then
+    log_error "Failed to setup virtual environment"
+    exit 1
+fi
 
 echo "Formatting code with black..."
 black app/ tests/

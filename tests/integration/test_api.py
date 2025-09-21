@@ -1,6 +1,8 @@
 """Integration tests for API endpoints."""
+
 import pytest
 from fastapi.testclient import TestClient
+
 
 def test_api_status_endpoint(client: TestClient):
     """Test API status endpoint."""

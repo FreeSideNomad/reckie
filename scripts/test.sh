@@ -1,8 +1,29 @@
 #!/bin/bash
 set -e
 
+# Source common utilities
+source "$(dirname "$0")/common.sh"
+
 echo "🧪 Running Reckie test suite..."
-source .venv/bin/activate
+
+# Check dependencies
+log_info "Checking dependencies..."
+if ! check_dependencies "docker" "docker-compose" "python3"; then
+    log_error "Missing required dependencies. Please install them and try again."
+    exit 1
+fi
+
+# Check and setup virtual environment
+if ! check_venv; then
+    log_error "Failed to setup virtual environment"
+    exit 1
+fi
+
+# Check Docker
+if ! check_docker; then
+    log_error "Docker is required for testing"
+    exit 1
+fi
 
 docker-compose -f docker/docker-compose.yml up -d db
 

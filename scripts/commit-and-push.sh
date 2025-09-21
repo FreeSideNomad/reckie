@@ -1,12 +1,8 @@
 #!/bin/bash
 set -e
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Source common utilities
+source "$(dirname "$0")/common.sh"
 
 # Configuration
 MAX_RETRIES=5
@@ -17,11 +13,18 @@ REPO_NAME="reckie"
 echo -e "${BLUE}🚀 Intelligent Commit and Push Script${NC}"
 echo "================================================"
 
-# Function to print colored output
-log_info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
-log_success() { echo -e "${GREEN}✅ $1${NC}"; }
-log_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
-log_error() { echo -e "${RED}❌ $1${NC}"; }
+# Check dependencies
+log_info "Checking dependencies..."
+if ! check_dependencies "git" "gh" "jq" "curl"; then
+    log_error "Missing required dependencies. Please install them and try again."
+    exit 1
+fi
+
+# Check GitHub CLI authentication
+if ! check_gh_auth; then
+    log_error "GitHub CLI authentication required for this script."
+    exit 1
+fi
 
 # Function to get current branch
 get_current_branch() {

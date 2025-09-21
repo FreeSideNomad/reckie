@@ -137,11 +137,29 @@ REPO_OWNER=FreeSideNomad
 REPO_NAME=reckie
 ```
 
-### Required Tools
-- `gh` (GitHub CLI)
-- `git`
-- `curl`
-- `jq` (for JSON parsing)
+### Automatic Dependency Management
+All scripts now include intelligent dependency checking and automatic installation:
+
+**Automatically Detected & Installed Tools:**
+- `gh` (GitHub CLI) - for repository operations
+- `git` - version control
+- `curl` - HTTP requests
+- `jq` - JSON parsing for GitHub API responses
+- `docker` & `docker-compose` - container orchestration
+- `python3` - Python runtime
+- `uv` - modern Python package manager
+
+**Cross-Platform Support:**
+- **macOS**: Uses Homebrew for package installation
+- **Linux**: Supports apt-get, yum, dnf, and pacman
+- **Windows**: Uses Chocolatey or winget
+
+**Smart Installation Features:**
+- Detects missing dependencies before script execution
+- Attempts automatic installation using system package manager
+- Provides manual installation instructions if auto-install fails
+- Verifies successful installation before proceeding
+- GitHub CLI authentication prompts when needed
 
 ## Advanced Usage
 

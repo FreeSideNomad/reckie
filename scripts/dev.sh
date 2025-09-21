@@ -1,8 +1,29 @@
 #!/bin/bash
 set -e
 
+# Source common utilities
+source "$(dirname "$0")/common.sh"
+
 echo "🚀 Starting Reckie development server..."
-source .venv/bin/activate
+
+# Check dependencies
+log_info "Checking dependencies..."
+if ! check_dependencies "docker" "docker-compose" "curl"; then
+    log_error "Missing required dependencies. Please install them and try again."
+    exit 1
+fi
+
+# Check and setup virtual environment
+if ! check_venv; then
+    log_error "Failed to setup virtual environment"
+    exit 1
+fi
+
+# Check Docker
+if ! check_docker; then
+    log_error "Docker is required for development"
+    exit 1
+fi
 
 if ! docker-compose -f docker/docker-compose.yml ps | grep -q "Up"; then
     echo "Starting Docker services..."

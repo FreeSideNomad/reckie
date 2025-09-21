@@ -1,12 +1,31 @@
 #!/bin/bash
 set -e
 
+# Source common utilities
+source "$(dirname "$0")/common.sh"
+
 echo "🚀 Setting up Reckie development environment..."
 
-if ! command -v uv &> /dev/null; then
-    echo "Installing uv package manager..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    source $HOME/.cargo/env
+# Check dependencies
+log_info "Checking dependencies..."
+if ! check_dependencies "curl" "docker" "docker-compose"; then
+    log_error "Missing required dependencies. Please install them and try again."
+    exit 1
+fi
+
+# Check and install uv if needed
+if ! command_exists uv; then
+    log_info "Installing uv package manager..."
+    if ! check_dependencies "uv"; then
+        log_error "Failed to install uv package manager"
+        exit 1
+    fi
+fi
+
+# Check Docker
+if ! check_docker; then
+    log_error "Docker is required for development"
+    exit 1
 fi
 
 echo "Creating virtual environment..."
