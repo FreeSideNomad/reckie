@@ -1,5 +1,7 @@
 """FastAPI application entry point."""
 
+from typing import Dict
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -25,7 +27,7 @@ app.include_router(main_routes.router)
 
 
 @app.get("/", response_class=HTMLResponse, name="home")
-async def read_root(request: Request):
+async def read_root(request: Request) -> HTMLResponse:
     """Dashboard home page."""
     return templates.TemplateResponse(
         request, "index.html", {"title": "Reckie - Dashboard"}
@@ -33,7 +35,7 @@ async def read_root(request: Request):
 
 
 @app.get("/health")
-async def health_check():
+async def health_check() -> Dict[str, str]:
     """Health check endpoint."""
     return {"status": "healthy", "version": "0.1.0"}
 
