@@ -42,9 +42,7 @@ async def ai_analysis_page(request: Request):
 async def smart_generation_page(request: Request):
     """Smart Generation page."""
     return templates.TemplateResponse(
-        request,
-        "smart-generation.html",
-        {"title": "Smart Generation - Reckie"}
+        request, "smart-generation.html", {"title": "Smart Generation - Reckie"}
     )
 
 
