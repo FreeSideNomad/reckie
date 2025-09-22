@@ -72,9 +72,9 @@ validation_rules:
   - "Conversation must be logged before submission"
 
 data_sources:
-  - "Document content from file system"
+  - "Document content from GitHub wiki with RAG indexing in PostgreSQL"
   - "Project context from GitHub repository"
-  - "Conversation history from logging service"
+  - "Conversation history from PostgreSQL logging service"
   - "AI responses from OpenAI API"
 
 error_states:

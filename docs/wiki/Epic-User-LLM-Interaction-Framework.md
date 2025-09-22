@@ -84,7 +84,8 @@ This epic establishes the foundational framework for user-LLM interactions withi
 ### Integration Points
 - OpenAI API for LLM processing
 - File system for document storage
-- PostgreSQL (future) for conversation and context storage
+- PostgreSQL for conversation and context storage
+- PostgreSQL with pgvector for RAG storage
 - GitHub integration (future) for version control
 
 ## Acceptance Criteria
@@ -123,6 +124,9 @@ This epic establishes the foundational framework for user-LLM interactions withi
 - FastAPI web framework already established
 - Jinja2 templating system already configured
 - httpx for async HTTP client to OpenAI
+- PostgreSQL database for conversation and context storage
+- pgvector extension for RAG storage and vector similarity search
+- SQLAlchemy ORM for database operations
 - Markdown parsing library for document preview
 - CSS framework for responsive design
 
@@ -133,31 +137,33 @@ This epic establishes the foundational framework for user-LLM interactions withi
 
 ## Implementation Phases
 
-### Phase 1: Foundation (Week 1)
+**Note**: Following reckie.wiki/Development-Processes.md, domain modeling must be completed before detailed implementation planning.
+
+### Phase 1: Foundation
 - OpenAI API integration with test endpoint
 - Basic web form for message input/output
-- Simple conversation logging to console
+- PostgreSQL setup with conversation logging
 - Error handling and validation
 
-### Phase 2: Interface (Week 2)
+### Phase 2: Interface
 - Enhanced web interface with conversation history
 - Real-time message display and formatting
 - User feedback and loading states
 - Basic styling and responsive design
 
-### Phase 3: Documents (Week 3)
+### Phase 3: Documents
 - Document loading and markdown preview
 - Edit mode with syntax highlighting
 - Document context integration with LLM
 - Basic document modification workflow
 
-### Phase 4: Intelligence (Week 4)
+### Phase 4: Intelligence
 - Contextual prompt system implementation
+- pgvector setup for RAG storage
 - Project context retrieval and integration
 - Clarifying question generation
-- Advanced document update suggestions
 
-### Phase 5: Collaboration (Week 5)
+### Phase 5: Collaboration
 - Document change approval workflow
 - Advanced conversation management
 - Performance optimization and error recovery
@@ -194,8 +200,8 @@ This epic establishes the foundational framework for user-LLM interactions withi
 ## Future Enhancements
 
 ### Database Integration
-- PostgreSQL storage for conversation history
-- Vector database for RAG-based context retrieval
+- PostgreSQL storage for conversation history (implemented in core)
+- pgvector for RAG-based context retrieval (implemented in core)
 - User session and preference management
 
 ### GitHub Integration

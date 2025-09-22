@@ -34,7 +34,7 @@ class OpenAIService:
             ]  # type: ignore[no-any-return]
 
     async def generate_completion(
-        self, prompt: str, model: str = "gpt-3.5-turbo", context: Optional[str] = None
+        self, prompt: str, model: str = "gpt-3.5-turbo"
     ) -> Optional[str]:
         """Generate completion using OpenAI API."""
         if not self.api_key:
@@ -45,20 +45,13 @@ class OpenAIService:
             "Content-Type": "application/json",
         }
 
-        # Build messages array with context if provided
-        messages = []
-        if context:
-            messages.append({"role": "system", "content": context})
-        messages.append({"role": "user", "content": prompt})
-
         payload = {
             "model": model,
-            "messages": messages,
-            "max_tokens": 500,  # Increased for more detailed responses
-            "temperature": 0.7,  # Add some creativity while maintaining accuracy
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 150,
         }
 
-        async with httpx.AsyncClient(timeout=30.0) as client:  # Increased timeout
+        async with httpx.AsyncClient() as client:
             response = await client.post(
                 f"{self.base_url}/chat/completions", headers=headers, json=payload
             )
