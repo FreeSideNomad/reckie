@@ -99,11 +99,35 @@ Before starting any development work:
 
 ## Stakeholder Communication Protocol
 
-- Present plans as GitHub Issues for review
-- Create UI mocks in structured format (Markdown/YAML) before coding
-- Implement feedback loops at every stage
-- Prioritize user experience over technical elegance
-- Wait for stakeholder approval before proceeding with significant changes
+### CLARIFIED DEVELOPMENT WORKFLOW (Updated 2024-09-21)
+
+**Phase 1: Planning & Collaboration**
+1. **Collaborate on .md files** - Work together on documentation and requirements
+2. **Stakeholder review** - Present .md files for review and suggestions
+3. **Wait for approval** - Get explicit approval before proceeding to implementation
+
+**Phase 2: Issue Creation**
+4. **Create GitHub Issues** - Based on approved .md files, create Epic, Feature, and User Story issues
+5. **Issue-driven development** - Each user story becomes a development task
+
+**Phase 3: Implementation Cycle (Per User Story)**
+6. **Explicit approval required** - Get approval for each user story before starting
+7. **Create feature branch** - Create branch for specific user story
+8. **Implement & test** - Code until all tests pass
+9. **Commit & merge** - Merge to remote main and fix build issues
+
+**Phase 4: Validation & Iteration**
+10. **Manual testing** - Stakeholder performs manual testing
+11. **Issue creation** - Create GitHub issues for any problems found
+12. **Fix & merge** - Implement fixes and merge code
+13. **Repeat cycle** - Continue manual testing and feedback until user story is complete
+14. **Move to next story** - Only then proceed to next user story
+
+### CRITICAL RULE: NO CODE WITHOUT EXPLICIT APPROVAL
+- ✅ Collaborate on .md files freely
+- ❌ Never implement code without explicit stakeholder approval
+- ❌ Never create GitHub issues without approved requirements
+- ❌ Never merge code without passing tests and build validation
 
 ---
 
