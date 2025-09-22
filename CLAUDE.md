@@ -115,8 +115,195 @@ This file provides essential context and guidelines for Claude Code sessions wor
 ### Data Storage Strategy
 - Conversational data in PostgreSQL tables
 - Vector embeddings in pgvector for similarity search
-- Document storage in GitHub (prefer github wiki) with version control. Current versions of documents also stored in
-RAG vactors in PostgeSQL
+- Document storage in GitHub wiki with RAG indexing in PostgreSQL
+- Planning documents managed through wiki repository with symlink integration
+
+## Wiki Management & Workflow
+
+### Repository Setup (One-Time)
+
+**🚨 IMPORTANT**: Planning documents are stored in a separate GitHub wiki repository to maintain proper version control and avoid duplication.
+
+#### First-Time Setup
+```bash
+# Run the setup script to configure wiki integration
+./scripts/setup-wiki.sh
+```
+
+**What the setup script does:**
+1. Clones `https://github.com/FreeSideNomad/reckie.wiki.git` to `../reckie.wiki`
+2. Creates symbolic link: `docs/wiki` → `../reckie.wiki`
+3. Adds `docs/wiki` to `.gitignore` to prevent duplication
+4. Verifies all planning documents are accessible
+
+#### Manual Setup (if script fails)
+```bash
+# Clone wiki repository
+git clone https://github.com/FreeSideNomad/reckie.wiki.git ../reckie.wiki
+
+# Create symbolic link
+ln -s ../reckie.wiki docs/wiki
+
+# Add to gitignore
+echo "docs/wiki" >> .gitignore
+```
+
+### Daily Workflow
+
+#### Planning Document Editing
+```bash
+# 1. Edit files normally in VS Code
+# Files appear at docs/wiki/ but are actually in separate repository
+code docs/wiki/Epic-User-LLM-Interaction-Framework.md
+
+# 2. Files are immediately available for Claude Code references
+# ✅ Read tool: docs/wiki/Epic-User-LLM-Interaction-Framework.md
+# ✅ Edit tool: docs/wiki/Essential-Use-Cases-LLM-Interaction.md
+```
+
+#### Committing Wiki Changes
+```bash
+# Navigate to wiki directory (follows symlink)
+cd docs/wiki
+
+# Standard git workflow in wiki repository
+git add .
+git commit -m "docs: update planning documents with PostgreSQL architecture"
+git push origin master
+
+# Return to main repository
+cd ../..
+```
+
+#### VS Code Integration
+- **File Explorer**: `docs/wiki/` appears as normal directory
+- **Git Integration**: Changes show in separate wiki repository
+- **Claude Code**: All file references work normally
+- **Search**: Wiki files included in workspace search
+
+### File Structure
+
+#### Main Repository
+```
+reckie/
+├── docs/
+│   ├── wiki/           # ← Symlink to ../reckie.wiki
+│   ├── vision.md
+│   └── development.md
+├── CLAUDE.md
+└── scripts/setup-wiki.sh
+```
+
+#### Wiki Repository (../reckie.wiki)
+```
+reckie.wiki/
+├── .git/                                    # Separate version control
+├── Epic-User-LLM-Interaction-Framework.md   # Epic planning
+├── Essential-Use-Cases-LLM-Interaction.md   # Use cases
+├── UI-Mockups-LLM-Interaction.md           # Interface mockups
+├── Development-Process.md                   # Process documentation
+└── Project-Vision.md                        # Project vision
+```
+
+### Version Control Benefits
+
+#### ✅ **Advantages of This Approach**
+- **Single Source of Truth**: Wiki repository is authoritative
+- **No Duplication**: Files exist only in wiki repository
+- **Familiar Paths**: `docs/wiki/` paths work in VS Code and Claude Code
+- **Separate Git History**: Planning docs have independent version control
+- **GitHub Wiki Integration**: Changes automatically sync to GitHub wiki interface
+- **Team Friendly**: Simple one-time setup for new developers
+
+#### 🔄 **Workflow Comparison**
+
+**Before (Problematic)**:
+```bash
+# Files in two places - sync issues
+reckie/docs/wiki/Epic-...                    # Copy 1
+reckie.wiki/Epic-...                         # Copy 2 (source of truth)
+```
+
+**After (Clean)**:
+```bash
+# Single source of truth with convenient access
+reckie/docs/wiki/ → ../reckie.wiki/          # Symlink
+reckie.wiki/Epic-...                         # Only copy (source of truth)
+```
+
+### Common Operations
+
+#### Adding New Planning Documents
+```bash
+# Create new document in wiki
+cd docs/wiki
+touch New-Feature-Planning.md
+code New-Feature-Planning.md
+
+# Commit to wiki repository
+git add New-Feature-Planning.md
+git commit -m "docs: add new feature planning document"
+git push
+```
+
+#### Reviewing Planning Documents
+```bash
+# Read any planning document using familiar paths
+# These work in Claude Code:
+docs/wiki/Epic-User-LLM-Interaction-Framework.md
+docs/wiki/Essential-Use-Cases-LLM-Interaction.md
+docs/wiki/UI-Mockups-LLM-Interaction.md
+```
+
+#### Updating CLAUDE.md References
+```bash
+# Update file references when needed
+# All docs/wiki/ paths work correctly
+# No changes needed for existing references
+```
+
+### Troubleshooting
+
+#### Symlink Issues
+```bash
+# Check if symlink is working
+ls -la docs/wiki
+# Should show: docs/wiki -> ../reckie.wiki
+
+# Recreate if broken
+rm docs/wiki
+ln -s ../reckie.wiki docs/wiki
+```
+
+#### Missing Wiki Repository
+```bash
+# Re-clone wiki repository
+git clone https://github.com/FreeSideNomad/reckie.wiki.git ../reckie.wiki
+```
+
+#### Git Confusion
+```bash
+# Check which repository you're in
+pwd && git remote -v
+
+# Main repository should show:
+# origin: github.com:FreeSideNomad/reckie.git
+
+# Wiki repository should show:
+# origin: github.com:FreeSideNomad/reckie.wiki.git
+```
+
+### Team Onboarding
+
+#### New Team Member Setup
+1. Clone main repository: `git clone https://github.com/FreeSideNomad/reckie.git`
+2. Run setup: `./scripts/setup-wiki.sh`
+3. Verify: `ls docs/wiki/` should show planning documents
+
+#### Documentation for New Developers
+- Point them to this section of CLAUDE.md
+- Emphasize the one-time setup requirement
+- Explain the symlink concept and separate git repositories
 
 ## Quality Standards
 
