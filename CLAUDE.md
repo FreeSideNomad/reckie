@@ -11,6 +11,14 @@ This file provides essential context and guidelines for Claude Code sessions wor
 - **Development Process**: `/docs/development.md` - Comprehensive development methodology
 - **Process Notes**: `/DEVELOPMENT_NOTES.md` - Critical process reminders and lessons learned
 
+### Wiki Documents (GitHub Wiki)
+Wiki documents are stored in `/tmp/reckie.wiki/` (symlinked as `docs/wiki/`) and synced with GitHub Wiki:
+- **Epic Definition**: `docs/wiki/Epic-User-LLM-Interaction-Framework.md`
+- **Essential Use Cases**: `docs/wiki/Essential-Use-Cases-LLM-Interaction.md`
+- **UI Mockups**: `docs/wiki/UI-Mockups-LLM-Interaction.md`
+- **Development Process**: `docs/wiki/Development-Process.md`
+- **Project Vision**: `docs/wiki/Project-Vision.md`
+
 ## Critical Development Process
 
 **🚨 MANDATORY: NO CODE WITHOUT EXPLICIT STAKEHOLDER APPROVAL**
@@ -135,21 +143,23 @@ RAG vactors in PostgeSQL
 ## Current Project State
 
 ### Active Epic
-**User-LLM Interaction Framework** - Located in `/docs/wiki/Epic-User-LLM-Interaction-Framework.md`
+**User-LLM Interaction Framework** - Located in `docs/wiki/Epic-User-LLM-Interaction-Framework.md`
 - Establishes foundational framework for user-LLM interactions
 - PostgreSQL integration for conversation and context storage
 - OpenAI API integration with proper error handling
 - Web interface for collaborative document editing
 
-### Development Branch
-- **Active Branch**: `feature/walking-skeleton`
-- **Status**: Planning phase complete, awaiting stakeholder approval of .md files
-- **Next Step**: Domain modeling following development process guidelines
+### Development Status
+- **Active Branch**: `main` (walking skeleton completed and merged)
+- **Status**: Planning documents finalized and synced to GitHub Wiki
+- **Next Step**: Create GitHub Issues based on approved planning documents
 
-### Planning Documents (Ready for Review)
-1. `/docs/wiki/Epic-User-LLM-Interaction-Framework.md`
-2. `/docs/wiki/Essential-Use-Cases-LLM-Interaction.md`
-3. `/docs/wiki/UI-Mockups-LLM-Interaction.md`
+### Planning Documents (Available in Wiki)
+1. `docs/wiki/Epic-User-LLM-Interaction-Framework.md` - Epic definition and scope
+2. `docs/wiki/Essential-Use-Cases-LLM-Interaction.md` - Core use cases
+3. `docs/wiki/UI-Mockups-LLM-Interaction.md` - Interface design mockups
+4. `docs/wiki/Development-Process.md` - Process documentation
+5. `docs/wiki/Project-Vision.md` - Project vision documentation
 
 ## AI Integration Guidelines
 
